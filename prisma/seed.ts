@@ -1,10 +1,10 @@
 import { ConfigService } from '@nestjs/config';
 import { FileHelper } from '../src/helpers/file-system/file-helper';
 import { usersSeeder } from './seeders/users.seeder';
-import { PrismaClient as PrismaAdminFunduq } from './generated/funduq-admin';
+import { PrismaClient as PrismaAdmin } from '@prisma/client';
 import { permissionsSeeder } from './seeders/permissions.seeder';
 
-const prismaAdmin = new PrismaAdminFunduq();
+const prismaAdmin = new PrismaAdmin();
 const config = new ConfigService({ STORAGE: 'storage' });
 const fileHelper = new FileHelper(config);
 prismaAdmin.$use(async (params, next) => {

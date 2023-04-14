@@ -1,5 +1,5 @@
+import { Prisma, PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import { Prisma, PrismaClient } from '../generated/funduq-admin';
 
 export const usersSeeder = async (prisma: PrismaClient) => {
   try {

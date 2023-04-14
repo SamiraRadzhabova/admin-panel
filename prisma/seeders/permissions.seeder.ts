@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '../generated/funduq-admin';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 const permissions: Prisma.PermissionCreateManyInput[] = [
   { name: 'Read user`s information', key: 'USER_INFO' },
