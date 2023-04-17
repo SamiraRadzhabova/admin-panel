@@ -10,6 +10,7 @@ import { IPayload } from './interfaces/payload.interface';
 import { ConfigService } from '@nestjs/config';
 import * as moment from 'moment';
 import { JwtService } from '@nestjs/jwt';
+import { FileHelper } from 'src/helpers/file-system/file-helper';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +18,7 @@ export class AuthService {
     private readonly prismaAdmin: PrismaAdminService,
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
+    private readonly fileHelper: FileHelper,
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -202,6 +204,10 @@ export class AuthService {
       where: { user_permissions: { some: { user_id } } },
       select: { id: true, key: true, name: true },
     });
-    return permissions;
+    return permissions.map(({ id, key, name }) => ({
+      id,
+      name,
+      path: this.fileHelper.getFullPath(`cats/${key}`) + '.jpg',
+    }));
   }
 }

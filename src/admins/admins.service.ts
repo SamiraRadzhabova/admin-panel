@@ -9,13 +9,6 @@ import { Prisma } from '@prisma/client';
 export class AdminsService {
   constructor(private readonly prismaAdmin: PrismaAdminService) {}
 
-  async getPermissions() {
-    const permissions = await this.prismaAdmin.permission.findMany({
-      select: { id: true, key: true, name: true },
-    });
-    return permissions;
-  }
-
   async createSubAdmin({ permission_ids, ...dto }: CreateSubAdminDto) {
     const data: Prisma.UserCreateInput = {
       ...dto,

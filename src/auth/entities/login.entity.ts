@@ -15,7 +15,7 @@ class UserLoginEntity {
   @ApiProperty({ example: Role.SUB_ADMIN, enum: Role })
   role: Role;
   @ApiProperty({
-    example: [PermissionKey.CONTENT, PermissionKey.DASHBOARD],
+    example: [PermissionKey.BLACK_CAT, PermissionKey.WHITE_CAT],
     enum: PermissionKey,
     isArray: true,
   })

@@ -26,7 +26,6 @@ import { AdminsService } from './admins.service';
 import { CreateSubAdminDto } from './dto/create-sub-admin.dto';
 import { SubAdminIdDto } from './dto/sub-admin-id.dto.';
 import { UpdateSubAdminDto } from './dto/update-sub-admin.dto';
-import { FullPermissionEntity } from '../helpers/entities/permission.entity';
 import {
   SubAdminEntity,
   SubAdminSearchEntity,
@@ -43,19 +42,6 @@ import { Role } from '@prisma/client';
 @Controller('admins')
 export class AdminsController {
   constructor(private readonly adminsService: AdminsService) {}
-
-  // #region Swagger Decorators
-  @ApiOperation({ summary: 'Get permissions' })
-  @ApiOkResponse({
-    type: FullPermissionEntity,
-    isArray: true,
-  })
-  // #endregion
-  @Roles(Role.ADMIN, Role.SUB_ADMIN)
-  @Get('permissions')
-  getPermissions(): Promise<FullPermissionEntity[]> {
-    return this.adminsService.getPermissions();
-  }
 
   // #region Swagger Decorators
   @ApiOperation({ summary: 'Get sub-admins' })

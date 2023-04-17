@@ -42,6 +42,8 @@ async function bootstrap() {
     }),
   );
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  app.useStaticAssets(join(__dirname, '..', 'storage/app/public'));
+  console.log(join(__dirname, '..', 'storage'));
   app.useGlobalFilters(
     new AllExceptionsFilter(app.get(HttpAdapterHost), app.get(AppLogger)),
   );

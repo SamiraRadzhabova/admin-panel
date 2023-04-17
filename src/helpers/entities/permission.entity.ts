@@ -8,6 +8,6 @@ export class PermissionEntity {
 }
 
 export class FullPermissionEntity extends PermissionEntity {
-  @ApiProperty({ example: 'USER_INFO' })
-  key: string;
+  @ApiProperty({ example: '/..//././' })
+  path: string;
 }

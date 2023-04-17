@@ -78,9 +78,9 @@ enum Role {
 }
 
 enum PermissionKey {
-  USER_INFO
-  USER_BAN
-  DASHBOARD
-  CONTENT
-  SLIDER
+  WHITE_CAT
+  BLACK_CAT
+  BROWN_CAT
+  ORANGE_CAT
+  GREY_CAT
 }
