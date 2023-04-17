@@ -13,7 +13,6 @@ export const usersSeeder = async (prisma: PrismaClient) => {
         email: 'admin@funduq.ua',
         last_name: 'Smith',
         role: 'ADMIN',
-        position: 'Admin',
         user_permissions: {
           createMany: {
             data: permissions.map(({ id }) => ({ permission_id: id })),

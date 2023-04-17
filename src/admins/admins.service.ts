@@ -4,10 +4,26 @@ import { PrismaAdminService } from 'src/prisma/prisma-admin.service';
 import { CreateSubAdminDto } from './dto/create-sub-admin.dto';
 import { UpdateSubAdminDto } from './dto/update-sub-admin.dto';
 import { Prisma } from '@prisma/client';
+import { FileHelper } from 'src/helpers/file-system/file-helper';
+import { SnakeCaseToLocalText } from 'src/helpers/const-to-text';
 
 @Injectable()
 export class AdminsService {
-  constructor(private readonly prismaAdmin: PrismaAdminService) {}
+  constructor(
+    private readonly prismaAdmin: PrismaAdminService,
+    private readonly fileHelper: FileHelper,
+  ) {}
+
+  async getPermissions() {
+    const permissions = await this.prismaAdmin.permission.findMany({
+      select: { id: true, key: true, name: true },
+    });
+    return permissions.map(({ id, key, name }) => ({
+      id,
+      name: SnakeCaseToLocalText(name),
+      path: this.fileHelper.getFullPath(`cats/${key}`) + '.jpg',
+    }));
+  }
 
   async createSubAdmin({ permission_ids, ...dto }: CreateSubAdminDto) {
     const data: Prisma.UserCreateInput = {
@@ -64,7 +80,6 @@ export class AdminsService {
         id: true,
         first_name: true,
         last_name: true,
-        position: true,
         email: true,
       },
     });
@@ -79,7 +94,6 @@ export class AdminsService {
           id: true,
           first_name: true,
           last_name: true,
-          position: true,
           email: true,
           user_permissions: {
             select: { permission: { select: { id: true, name: true } } },

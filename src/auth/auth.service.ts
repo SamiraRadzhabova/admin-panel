@@ -103,7 +103,6 @@ export class AuthService {
           email: true,
           first_name: true,
           last_name: true,
-          position: true,
           role: true,
           user_permissions: {
             select: { permission: { select: { key: true } } },
@@ -176,7 +175,6 @@ export class AuthService {
           email: true,
           first_name: true,
           last_name: true,
-          position: true,
           role: true,
           user_permissions: {
             select: { permission: { select: { key: true } } },

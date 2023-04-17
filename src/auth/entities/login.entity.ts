@@ -10,8 +10,6 @@ class UserLoginEntity {
   last_name: string;
   @ApiProperty({ example: 'adam@gmail.com' })
   email: string;
-  @ApiProperty({ example: 'Admin' })
-  position: string;
   @ApiProperty({ example: Role.SUB_ADMIN, enum: Role })
   role: Role;
   @ApiProperty({

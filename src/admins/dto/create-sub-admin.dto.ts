@@ -36,13 +36,6 @@ export class CreateSubAdminDto {
   })
   @ApiProperty({ example: 'Smith' })
   last_name: string;
-  @IsDefined({ message: 'Post is required.' })
-  @IsString({ message: 'Post must be a string.' })
-  @Length(2, 50, {
-    message: 'Post must be between 2 and 50 characters long.',
-  })
-  @ApiProperty({ example: 'HR manager' })
-  position: string;
   @IsDefined({ message: 'Password is required.' })
   @Length(8, 32, {
     message: 'Password must be between 8 and 32 characters long.',
@@ -54,5 +47,6 @@ export class CreateSubAdminDto {
   @IsArray()
   @ArrayMinSize(1)
   @EntityAdminExists('permission')
+  @ApiProperty({ example: [1, 2] })
   permission_ids: number[];
 }

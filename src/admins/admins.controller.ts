@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -31,6 +32,9 @@ import {
   SubAdminSearchEntity,
 } from './entities/sub-admin.entity';
 import { Role } from '@prisma/client';
+import { FullPermissionEntity } from 'src/helpers/entities/permission.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { IRequest } from 'src/auth/interfaces/request.interface';
 
 // #region Swagger Decorators
 @ApiTags('Admins')
@@ -42,6 +46,20 @@ import { Role } from '@prisma/client';
 @Controller('admins')
 export class AdminsController {
   constructor(private readonly adminsService: AdminsService) {}
+
+  // #region Swagger Decorators
+  @ApiOperation({ summary: 'Get permissions for admin' })
+  @ApiOkResponse({
+    type: FullPermissionEntity,
+    isArray: true,
+  })
+  @ApiBearerAuth()
+  // #endregion
+  @UseGuards(JwtAuthGuard)
+  @Get('permissions')
+  getPermissions(): Promise<FullPermissionEntity[]> {
+    return this.adminsService.getPermissions();
+  }
 
   // #region Swagger Decorators
   @ApiOperation({ summary: 'Get sub-admins' })

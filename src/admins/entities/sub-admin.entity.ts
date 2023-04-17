@@ -10,8 +10,6 @@ export class SubAdminEntity {
   last_name: string;
   @ApiProperty({ example: 'adam@gmail.com' })
   email: string;
-  @ApiProperty({ example: 'Admin' })
-  position: string;
   @ApiProperty({
     isArray: true,
     type: PermissionEntity,
