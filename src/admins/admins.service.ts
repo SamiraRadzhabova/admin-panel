@@ -6,12 +6,14 @@ import { UpdateSubAdminDto } from './dto/update-sub-admin.dto';
 import { Prisma } from '@prisma/client';
 import { FileHelper } from 'src/helpers/file-system/file-helper';
 import { SnakeCaseToLocalText } from 'src/helpers/const-to-text';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class AdminsService {
   constructor(
     private readonly prismaAdmin: PrismaAdminService,
     private readonly fileHelper: FileHelper,
+    private readonly authService: AuthService,
   ) {}
 
   async getPermissions() {
@@ -25,9 +27,14 @@ export class AdminsService {
     }));
   }
 
-  async createSubAdmin({ permission_ids, ...dto }: CreateSubAdminDto) {
+  async createSubAdmin({
+    permission_ids,
+    password,
+    ...dto
+  }: CreateSubAdminDto) {
     const data: Prisma.UserCreateInput = {
       ...dto,
+      password: this.authService.hashPassword(password),
       user_permissions: {
         createMany: {
           data: permission_ids.map((permission_id) => ({

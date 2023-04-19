@@ -25,5 +25,6 @@ import { FileHelper } from '../helpers/file-system/file-helper';
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy, FileHelper],
+  exports: [AuthService],
 })
 export class AuthModule {}

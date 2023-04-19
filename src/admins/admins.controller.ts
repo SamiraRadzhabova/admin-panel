@@ -34,7 +34,6 @@ import {
 import { Role } from '@prisma/client';
 import { FullPermissionEntity } from 'src/helpers/entities/permission.entity';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { IRequest } from 'src/auth/interfaces/request.interface';
 
 // #region Swagger Decorators
 @ApiTags('Admins')
