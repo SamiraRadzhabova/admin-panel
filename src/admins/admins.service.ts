@@ -56,7 +56,6 @@ export class AdminsService {
   ) {
     const data: Prisma.UserUpdateInput = {
       ...dto,
-      password: dto?.email ? null : undefined,
       user_permissions: permission_ids
         ? {
             createMany: {
